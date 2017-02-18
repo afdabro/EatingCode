@@ -53,7 +53,6 @@
         "no-magic-numbers": true,
         "no-namespace": true,
         "no-reference": true,
-        "no-var-requires": true,
         "only-arrow-functions": [true, "allow-declarations", "allow-named-functions"],
         "prefer-for-of": true,
         "typedef-whitespace": [
@@ -103,7 +102,6 @@
         "max-classes-per-file": [true, 1],
         "no-default-export": true,
         "no-mergeable-namespace": true,
-        "no-require-imports": true,
         "no-trailing-whitespace": true,
         "object-literal-sort-keys": true,
         "prefer-const": true,

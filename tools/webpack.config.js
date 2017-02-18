@@ -58,6 +58,11 @@ module.exports = (isDev) => {
     const ifProd = then => (!isDev ? then : null);
     const nullsOut = i => i;
 
+    const extractSass = new ExtractTextPlugin({
+        filename: "[name].[contenthash].css",
+        disable: false
+    });
+
     return {
         devtool: isDev ? 'inline-source-map' : 'source-map',
         target: 'web',
@@ -94,7 +99,7 @@ module.exports = (isDev) => {
             // ifDev(new webpack.HotModuleReplacementPlugin()),
             ifDev(new webpack.NamedModulesPlugin()),
             ifProd(new WebpackMd5Hash()),
-            ifProd(new ExtractTextPlugin({ filename: '[name].[contenthash].css' })),
+            extractSass,
             ifProd(new webpack.optimize.UglifyJsPlugin({ mangle: true, warnings: false, 'screw_ie8': true, conditionals: true, unused: true, comparisons: true, sourceMap: true, sequences: true, 'dead_code': true, evaluate: true, 'if_return': true, 'join_vars': true, output: { comments: false } })),
             new HtmlWebpackPlugin({ template: 'index.html', inject: true, minify: { removeComments: !isDev, collapseWhitespace: !isDev, keepClosingSlash: !isDev } }),
             new StyleLintPlugin({
@@ -116,14 +121,16 @@ module.exports = (isDev) => {
                     exclude: /node_modules/
                 },
                 {
-                    test: /\.(css|scss)$/,
-                    include: [sourcePath],
-                    loader: isDev ? 'style-loader!css-loader?sourceMap!sass-loader?sourceMap' : ExtractTextPlugin.extract({ loader: 'css-loader?sourceMap!sass-loader?sourceMap' })
-                },
-                {
-                    test: /\.css$/,
-                    include: [path.resolve(__dirname, '../node_modules/normalize.css')],
-                    loader: isDev ? 'style-loader!css-loader' : ExtractTextPlugin.extract({ loader: 'css-loader' })
+                    test: /\.scss$/,
+                    loader: extractSass.extract({
+                        use: [{
+                            loader: "css-loader"
+                        }, {
+                            loader: "sass-loader"
+                        }
+                        ],
+                        fallback: "style-loader"
+                    })
                 },
                 {
                     test: /\.(png|jpg|wav|mp3)$/,
@@ -146,7 +153,7 @@ module.exports = (isDev) => {
             ].filter(nullsOut)
         },
         resolve: {
-            extensions: ['.tsx', '.ts', '.js']
+            extensions: ['.tsx', '.ts', '.js', '.scss']
         }
     };
 };

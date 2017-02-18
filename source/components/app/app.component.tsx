@@ -1,5 +1,7 @@
 import * as React from "react";
 
+require("./app.scss");
+
 import { NavComponent } from "../nav/nav.component";
 
 export class AppComponent extends React.Component<{}, {}> {
