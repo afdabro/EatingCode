@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { NavComponent } from "../nav/nav.component";
+
 export class AppComponent extends React.Component<{}, {}> {
   constructor(props) {
     super(props);
@@ -7,11 +9,17 @@ export class AppComponent extends React.Component<{}, {}> {
 
   public render() {
     return (
-      <div>
-        <h1>App router sample</h1>
-        <br/>
-        {this.props.children}
-      </div>
+      <main role="main">
+        <header>
+          <h1>Eating Code For Breakfast</h1>
+        </header>
+        <article>
+          {this.props.children}
+        </article>
+        <footer>
+          <NavComponent />
+        </footer>
+      </main>
     );
   }
 }
