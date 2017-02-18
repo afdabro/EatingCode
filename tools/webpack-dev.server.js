@@ -22,7 +22,7 @@ try {
     
     server.listen(port, 'localhost', () => {
         console.log(chalk.green(`Listening on Port: ${port}`));
-        open('http://localhost:3000');
+        open(`http://localhost:${port}`);
     });
 } catch (ex) {
     console.log(chalk.red(`The following error has ocurred: ${ex}`));

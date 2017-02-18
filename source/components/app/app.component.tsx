@@ -13,7 +13,7 @@ export class AppComponent extends React.Component<{}, {}> {
     return (
       <main role="main">
         <header>
-          <h1>Eating Code For Breakfast</h1>
+          <h1 className="app-font-headline">Eating Code For Breakfast</h1>
         </header>
         <article>
           {this.props.children}

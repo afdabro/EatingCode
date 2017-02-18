@@ -1,5 +1,19 @@
 @import "color.palette";
+@import "typography";
+@import "responsive";
 
-main {
+body {
     background-color: $primary-color
+}
+
+.app-font-headline {
+    @include app-font-md;
+
+    @include tablet {
+        @include app-font-lg;
+    }
+
+    @include desktop {
+        @include app-font-xl;
+    }
 }

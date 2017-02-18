@@ -1,0 +1,30 @@
+// typography
+
+// font family
+$font-family-default: "Comic Sans MS", cursive, sans-serif;
+
+// font sizes
+$font-size-sm: 1em;
+$font-size-md: 1.5em;
+$font-size-lg: 2em;
+$font-size-xl: 2.5em;
+
+@mixin app-font-sm {
+    font-family: $font-family-default;
+    font-size: $font-size-sm;
+}
+
+@mixin app-font-md {
+    @include app-font-sm;
+    font-size: $font-size-md;
+}
+
+@mixin app-font-lg {
+    @include app-font-md;
+    font-size: $font-size-lg;
+}
+
+@mixin app-font-xl {
+    @include app-font-lg;
+    font-size: $font-size-xl;
+}
