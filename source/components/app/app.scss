@@ -1,6 +1,6 @@
-@import "color.palette";
-@import "typography";
-@import "responsive";
+@import "../styles/color.palette";
+@import "../styles/typography";
+@import "../styles/responsive";
 
 body {
     background-color: $primary-color
@@ -8,6 +8,7 @@ body {
 
 .app-font-headline {
     @include app-font-md;
+    text-align: center;
 
     @include tablet {
         @include app-font-lg;

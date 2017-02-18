@@ -14,12 +14,12 @@ export class AppComponent extends React.Component<{}, {}> {
       <main role="main">
         <header>
           <h1 className="app-font-headline">Eating Code For Breakfast</h1>
+          <NavComponent />
         </header>
         <article>
           {this.props.children}
         </article>
         <footer>
-          <NavComponent />
         </footer>
       </main>
     );
