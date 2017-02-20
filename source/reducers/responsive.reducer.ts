@@ -1,12 +1,12 @@
+import Immutable from "immutable";
 import {SAVE_RESPONSIVE} from "../constants/actionTypes";
-import { InitialStateModel } from "./initilState.model";
+import { initialState } from "./initilState.model";
 
-export function responsiveReducer(state = new InitialStateModel().responsiveModel, action) {
+export function responsiveReducer(state = initialState.responsiveModel, action) {
 
-// TODO: use immutable
   switch (action.type) {
     case SAVE_RESPONSIVE:
-      return objectAssign({}, state, {"dateModified": action.dateModified});
+      return Immutable.Map(state).set("dateModified", action.dateModified);
 
     default:
       return state;

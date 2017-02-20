@@ -1,5 +1,7 @@
 import { ResponsiveModel } from "./responsive.model";
 
-export class InitialStateModel {
+class InitialStateModel {
     public responsiveModel: ResponsiveModel = new ResponsiveModel();
 };
+
+export const initialState = new InitialStateModel();
