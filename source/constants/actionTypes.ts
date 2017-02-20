@@ -1,0 +1,1 @@
+export const SAVE_RESPONSIVE = "SAVE_RESPONSIVE";
