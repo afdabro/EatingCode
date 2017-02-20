@@ -6,6 +6,7 @@
     "dev-start": "node tools/webpack-dev.server.js"
   },
   "devDependencies": {
+    "@types/immutable": "^3.8.7",
     "@types/moment": "^2.13.0",
     "@types/node": "^7.0.5",
     "@types/react": "^15.0.11",

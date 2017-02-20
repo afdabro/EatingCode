@@ -5,10 +5,14 @@ import { browserHistory , Router } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
 
 import {appRoutes} from "./app.routes";
+import { ResponsiveService } from "./services/responsive.service";
 import { configureStore } from "./store/configureStore";
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
+
+const responsiveService = new ResponsiveService(store);
+responsiveService.initialize();
 
 ReactDOM.render(
   <Provider store={store}>
