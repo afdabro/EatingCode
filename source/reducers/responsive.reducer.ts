@@ -1,15 +1,20 @@
-import { Map } from "immutable";
+import { Record } from "immutable";
 import { SAVE_RESPONSIVE } from "../constants/actionTypes";
-import { initialState } from "./initilState.model";
+import { initialState } from "../models/initilState.model";
 
-export function responsiveReducer(state = initialState.responsiveModel, action) {
-  let newState;
+export function responsiveReducer(state = initialState.get("responsiveModel"), action) {
   switch (action.type) {
     case SAVE_RESPONSIVE:
-      newState = Map(state);
-      const alteredState = newState.set("dateModified", action.dateModified).set("isDesktop", action.settings.isDesktop);
-      return alteredState;
+      const stateContext = Record(state);
+      return new stateContext({
+        "dateModified": action.dateModified,
+        "isDesktop": action.settings.isDesktop,
+      });
     default:
-      return state;
+      if (typeof (state) !== typeof (Record)) {
+        return Record(state);
+      } else {
+        return state;
+      }
   }
 }
