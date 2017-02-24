@@ -7,6 +7,8 @@ import { appRoutes } from "./app.routes";
 import { configureStore } from "./store/configureStore";
 import { syncImmutableHistoryWithStore } from "./store/immutablerouter.store";
 
+import "normalize.css";
+
 // currently not setting initial state
 const store = configureStore(undefined);
 const history = syncImmutableHistoryWithStore(store);
