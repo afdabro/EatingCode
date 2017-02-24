@@ -1,1 +1,20 @@
+@import "../styles/color.palette";
 
+.tileList li {
+    display: flex;
+    float: left;
+    height: 2em;
+}
+
+.tile a {
+    background: $accent-color-lt;
+    border-radius: 0.25em;
+    width: 2em;
+    height: 2em;
+    margin: auto;
+    margin-right: 0.5em;
+    i {
+        margin: 0.2em;
+        color: $accent-color-drk;
+    }
+}
