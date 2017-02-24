@@ -3,7 +3,7 @@ import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import { rootReducer } from "../reducers";
 
-function configureStoreProd(initialState?) {
+function configureStoreProd(initialState) {
   const middlewares = [
     // Add other middleware on this line...
 
@@ -15,7 +15,7 @@ function configureStoreProd(initialState?) {
   return createStore(rootReducer, initialState, compose(applyMiddleware(...middlewares)));
 }
 
-function configureStoreDev(initialState?) {
+function configureStoreDev(initialState) {
   const middlewares = [
     // Add other middleware on this line...
 

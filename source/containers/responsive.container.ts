@@ -5,7 +5,7 @@ import { ResponsiveComponent } from "../components/responsive/responsive.compone
 import { IResponsiveProps } from "../models/responsive.model";
 
 function mapStateToProps(state) {
-  return state.responsiveReducer.toObject();
+  return state.get("responsiveModel");
 }
 
 function mapDispatchToProps(dispatch) {

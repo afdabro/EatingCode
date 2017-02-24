@@ -4,7 +4,7 @@ import { IResponsiveModel } from "../models/responsive.model";
 
 // Only care about responsive model for now...
 function mapStateToProps(state) {
-    return state.responsiveReducer.toObject();
+    return state.get("responsiveModel").toJS();
 }
 
 // tslint:disable-next-line:variable-name
