@@ -8,7 +8,7 @@ export class ResponsiveComponent extends React.Component<IResponsiveProps, {}> {
 
     constructor(props) {
         super(props);
-        this.mql = window.matchMedia("(min-width: 32em)"); // TODO: Move to responsive.settings
+        this.mql = window.matchMedia("(min-width: 32em)");
         this.handleDesktopChange(this.mql);
         this.mql.addListener(this.handleDesktopChange.bind(this));
     }
