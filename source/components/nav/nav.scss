@@ -1,4 +1,6 @@
 @import "../styles/color.palette";
+@import "../styles/typography";
+@import "../styles/responsive";
 
 .tileList li {
     display: flex;
@@ -13,6 +15,13 @@
     height: 2em;
     margin: auto;
     margin-right: 0.5em;
+    @include tabletOrDesktop {
+        width: 4em;
+        text-align: center;
+        @include app-font-sm;
+        color: $accent-color-drk;
+    }
+
     i {
         margin: 0.2em;
         color: $accent-color-drk;
