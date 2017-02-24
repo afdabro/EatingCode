@@ -1,6 +1,8 @@
-import {routerReducer} from "react-router-redux";
-import { combineReducers } from "redux";
+import { combineReducers } from "redux-immutable";
+import { immutableRouterReducer } from "./immutablerouter.reducer";
+import { responsiveReducer } from "./responsive.reducer";
 
 export const rootReducer = combineReducers({
-  "routing": routerReducer,
+  "responsiveModel": responsiveReducer,
+  "routing": immutableRouterReducer,
 });

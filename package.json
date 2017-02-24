@@ -6,6 +6,7 @@
     "dev-start": "node tools/webpack-dev.server.js"
   },
   "devDependencies": {
+    "@types/immutable": "^3.8.7",
     "@types/moment": "^2.13.0",
     "@types/node": "^7.0.5",
     "@types/react": "^15.0.11",
@@ -64,6 +65,7 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.6.0",
     "redux-actions": "^1.2.1",
+    "redux-immutable": "^3.1.0",
     "redux-immutable-state-invariant": "^1.2.4",
     "redux-thunk": "^2.2.0"
   },
