@@ -1,9 +1,13 @@
 import * as React from "react";
+import * as Helmet from "react-helmet";
 import "react-redux";
 
 require("./app.scss");
 import { NavContainer } from "../../containers/nav.container";
 import { ResponsiveContainer } from "../../containers/responsive.container";
+
+const appTitle = "Eating Code";
+const appTitleTemplate = `%s | ${appTitle}`;
 
 export class AppComponent extends React.Component<{}, {}> {
   constructor(props) {
@@ -13,7 +17,11 @@ export class AppComponent extends React.Component<{}, {}> {
   public render() {
     return (
       <main role="main">
-
+        <Helmet
+            title="Home"
+            titleTemplate={appTitleTemplate}
+            defaultTitle={appTitle}
+        />
         <ResponsiveContainer dateModified={new Date()} isDesktop={false} saveResponsive={() => {
         // tslint:disable-next-line:no-console
           console.log("Hello HAL"); }} />
