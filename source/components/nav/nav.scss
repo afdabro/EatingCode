@@ -1,1 +1,38 @@
+@import "../styles/color.palette";
+@import "../styles/typography";
+@import "../styles/responsive";
 
+.navList li {
+    display: flex;
+    float: left;
+    height: 2em;
+}
+
+.navLink a:hover { 
+    background-color: darkorange;
+    border: 0.1em groove $accent-color-lt;
+}
+
+.navLink a {
+    background: $accent-color-lt;
+    border-radius: 0.25em;
+    width: 2em;
+    height: 2em;
+    margin: auto;
+    margin-right: 0.5em;
+    color: $accent-color-drk;
+    @include tabletOrDesktop {
+        width: 4em;
+        text-align: center;
+        @include app-font-sm;
+    }
+
+    i {
+        margin: 0.2em;
+    }
+}
+
+a.navLinkActive {
+    background-color: darkorange;
+    border: 0.1025em inset yellow;
+}

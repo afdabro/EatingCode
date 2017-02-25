@@ -133,6 +133,10 @@ module.exports = (isDev) => {
                     })
                 },
                 {
+                    test: /\.css$/,
+                    loader: "css-loader"
+                },
+                {
                     test: /\.(png|jpg|wav|mp3)$/,
                     include: [assetsPath],
                     loader: 'url-loader?limit=4096'
@@ -153,7 +157,7 @@ module.exports = (isDev) => {
             ].filter(nullsOut)
         },
         resolve: {
-            extensions: ['.tsx', '.ts', '.js', '.scss']
+            extensions: ['.tsx', '.ts', '.js', '.scss', 'css']
         }
     };
 };
