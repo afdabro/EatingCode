@@ -2,28 +2,37 @@
 @import "../styles/typography";
 @import "../styles/responsive";
 
-.tileList li {
+.navList li {
     display: flex;
     float: left;
     height: 2em;
 }
 
-.tile a {
+.navLink a:hover { 
+    background-color: darkorange;
+    border: 0.1em groove $accent-color-lt;
+}
+
+.navLink a {
     background: $accent-color-lt;
     border-radius: 0.25em;
     width: 2em;
     height: 2em;
     margin: auto;
     margin-right: 0.5em;
+    color: $accent-color-drk;
     @include tabletOrDesktop {
         width: 4em;
         text-align: center;
         @include app-font-sm;
-        color: $accent-color-drk;
     }
 
     i {
         margin: 0.2em;
-        color: $accent-color-drk;
     }
+}
+
+a.navLinkActive {
+    background-color: darkorange;
+    border: 0.1025em inset yellow;
 }

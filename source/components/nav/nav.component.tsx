@@ -9,9 +9,9 @@ export class NavComponent extends React.Component<IResponsiveModel, {}> {
     public render(): JSX.Element {
         return (
             <nav>
-                <ul className="tileList">
-                    <li className="tile"><Link to="/home">{this.props.isDesktop ? "Home" : (<i className="material-icons">home</i>)}</Link></li>
-                    <li className="tile"><Link to="/about">{this.props.isDesktop ? "About" : (<i className="material-icons">business center</i>)}</Link></li>
+                <ul className="navList">
+                    <li className="navLink"><Link to="/home" activeClassName="navLinkActive">{this.props.isDesktop ? "Home" : (<i className="material-icons">home</i>)}</Link></li>
+                    <li className="navLink"><Link to="/about" activeClassName="navLinkActive">{this.props.isDesktop ? "About" : (<i className="material-icons">business center</i>)}</Link></li>
                 </ul>
             </nav>
         );
