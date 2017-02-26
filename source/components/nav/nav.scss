@@ -2,10 +2,17 @@
 @import "../styles/typography";
 @import "../styles/responsive";
 
-.navList li {
+nav.navContainer {
     display: flex;
-    float: left;
-    height: 2em;
+    width: 100%;
+    justify-content: center;
+}
+
+ul.navList {
+    display: flex;
+    li {
+        display: flex;
+    }
 }
 
 .navLink a:hover { 

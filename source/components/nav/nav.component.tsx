@@ -10,7 +10,7 @@ export class NavComponent extends React.Component<IResponsiveModel, {}> {
     public render(): JSX.Element {
         const currentPath = this.getNavTitle();
         return (
-            <nav>
+            <nav className="navContainer">
                 <Helmet title={currentPath} />
                 <ul className="navList">
                     <li className="navLink"><Link to="/home" activeClassName="navLinkActive">{this.props.isDesktop ? "Home" : (<i className="material-icons">home</i>)}</Link></li>
