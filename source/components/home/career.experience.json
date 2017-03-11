@@ -1,0 +1,32 @@
+[
+  [
+    {
+      "area": "Operations",
+      "value": 85
+    },
+    {
+      "area": "Quality Assurance",
+      "value": 75
+    },
+    {
+      "area": "Business",
+      "value": 60
+    },
+    {
+      "area": "Software Engineering",
+      "value": 100
+    },
+    {
+      "area": "Security",
+      "value": 80
+    },
+    {
+      "area": "UX/UI Design",
+      "value": 30
+    },
+    {
+      "area": "Data Science",
+      "value": 35
+    }
+  ]
+]

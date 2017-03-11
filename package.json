@@ -6,6 +6,7 @@
     "dev-start": "node tools/webpack-dev.server.js"
   },
   "devDependencies": {
+    "@types/d3": "^4.6.0",
     "@types/immutable": "^3.8.7",
     "@types/moment": "^2.13.0",
     "@types/node": "^7.0.5",
@@ -53,11 +54,13 @@
   },
   "dependencies": {
     "core-js": "^2.4.1",
+    "d3": "^4.7.1",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.17.1",
     "normalize.css": "^5.0.0",
     "react": "^15.4.2",
+    "react-d3-library": "^1.1.7",
     "react-dom": "^15.4.2",
     "react-helmet": "^4.0.0",
     "react-redux": "^5.0.2",
