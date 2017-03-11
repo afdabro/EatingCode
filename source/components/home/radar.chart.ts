@@ -3,11 +3,14 @@ import { RadarChartOptions } from "./radar.chart.options";
 
 export class RadarChart {
 
-    // TODO: Refactor
-    public draw(d, options: RadarChartOptions) {
+    // TODO: Refactor into smaller reusable components.
+    // Source: https://gist.github.com/alandunning/4c36eb1abdb248de34c64f5672afd857
+    // Light modifications for Linting errors and React D3 library:
+    // Source: http://react-d3-library.github.io/
+    public draw(data, options: RadarChartOptions) {
         const magic2 = 2;
 
-        const allAxis = (d[0].map((i) => { return i.area; }));
+        const allAxis = (data[0].map((i) => { return i.area; }));
         const total = allAxis.length;
         const radius = options.factor * Math.min(options.w / magic2, options.h / magic2);
 
@@ -46,7 +49,7 @@ export class RadarChart {
         for (let j = 0; j < options.levels; j++) {
             const levelFactor = options.factor * radius * ((j + 1) / options.levels);
             g.selectAll(".levels")
-                .data([1]) // dummy data
+                .data([1])
                 .enter()
                 .append("svg:text")
                 .attr("x", () => { return levelFactor * (1 - options.factor * Math.sin(0)); })
@@ -57,7 +60,7 @@ export class RadarChart {
                 .attr("transform", "translate(" + (options.w / magic2 - levelFactor + options.toRight) + ", " + (options.h / magic2 - levelFactor) + ")")
                 .attr("fill", "#737373")
                 // tslint:disable-next-line:no-magic-numbers
-                .text((j + 1) * 100 / options.levels);
+                .text(Math.floor((j + 1) * 100 / options.levels));
         }
 
         let series = 0;
@@ -93,7 +96,7 @@ export class RadarChart {
             // tslint:disable-next-line:variable-name no-magic-numbers
             .attr("y", (_d, i) => { return options.h / magic2 * (1 - Math.cos(i * options.radians / total)) - 20 * Math.cos(i * options.radians / total); });
 
-        d.forEach((y) => {
+        data.forEach((y) => {
             const dataValues = [];
             g.selectAll(".nodes")
                 .data(y, (j: { value: number }, i) => {
@@ -127,7 +130,7 @@ export class RadarChart {
         });
         series = 0;
 
-        d.forEach((y) => {
+        data.forEach((y) => {
             const dataValues = [];
 
             g.selectAll(".nodes")

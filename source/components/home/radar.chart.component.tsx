@@ -7,7 +7,7 @@ import { RadarChartOptions } from "./radar.chart.options";
 const RD3Component = rd3.Component;
 
 // TODO: Get from data redux store
-const data = require("./data.json");
+const data = require("./career.experience.json");
 
 interface IRadarChartState {
     // tslint:disable-next-line:no-any
@@ -31,11 +31,14 @@ export class RadarChartComponent extends React.Component<RadarChartOptions, IRad
         this.setState({ "d3": this.radarChart.draw(data, this.chartSettings) });
     }
 
+    // TODO: work on verbiage
     public render() {
         return (
-            <div>
+            <figure>
+                <strong>Career Experience</strong>
                 <RD3Component data={this.state.d3} />
-            </div>
+                <figcaption>Fig. 1: <em>Self reflection of real-world experience.</em></figcaption>
+            </figure>
         );
     }
 }
