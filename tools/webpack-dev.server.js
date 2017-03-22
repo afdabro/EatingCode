@@ -17,12 +17,13 @@ try {
         hot: true,
         historyApiFallback: true,
         inline: true,
+        https: true,
         stats: { colors: true, assets: false, source: false, timings: true, hash: false, version: false, chunkModules: false, chunkOrigins: true },
     });
     
     server.listen(port, 'localhost', () => {
         console.log(chalk.green(`Listening on Port: ${port}`));
-        open(`http://localhost:${port}`);
+        open(`https://localhost:${port}`);
     });
 } catch (ex) {
     console.log(chalk.red(`The following error has ocurred: ${ex}`));

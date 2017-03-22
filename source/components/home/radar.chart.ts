@@ -7,7 +7,7 @@ export class RadarChart {
     // Source: https://gist.github.com/alandunning/4c36eb1abdb248de34c64f5672afd857
     // Light modifications for Linting errors and React D3 library:
     // Source: http://react-d3-library.github.io/
-    public draw(data, options: RadarChartOptions) {
+    public draw(data, options: RadarChartOptions): HTMLDivElement {
         const magic2 = 2;
 
         const allAxis = (data[0].map((i) => { return i.area; }));
