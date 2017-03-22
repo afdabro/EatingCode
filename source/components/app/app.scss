@@ -2,8 +2,15 @@
 @import "../styles/typography";
 @import "../styles/responsive";
 
-body {
-    background-color: $primary-color
+header {
+    background-color: $primary-color;
+    border-bottom: 0.2em solid $secondary-color;
+}
+
+article {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
 }
 
 .app-font-headline {

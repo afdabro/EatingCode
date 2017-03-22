@@ -21,6 +21,13 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 /*
+    Replaces strings with variables within html
+    Reference:
+    https://github.com/erraX/html-string-replace-webpack-plugin
+*/
+const HtmlStringReplace = require('html-string-replace-webpack-plugin');
+
+/*
     Extract text from bundle
     Reference:
     https://github.com/webpack-contrib/extract-text-webpack-plugin
@@ -102,6 +109,19 @@ module.exports = (isDev) => {
             extractSass,
             ifProd(new webpack.optimize.UglifyJsPlugin({ mangle: true, warnings: false, 'screw_ie8': true, conditionals: true, unused: true, comparisons: true, sourceMap: true, sequences: true, 'dead_code': true, evaluate: true, 'if_return': true, 'join_vars': true, output: { comments: false } })),
             new HtmlWebpackPlugin({ template: 'index.html', inject: true, minify: { removeComments: !isDev, collapseWhitespace: !isDev, keepClosingSlash: !isDev } }),
+            new HtmlStringReplace({
+                enable: true,
+                patterns: [
+                    {
+                        match: /<!-- @host -->/ig,
+                        replacement: function (match) {
+                            const localHost = 'https://localhost:3000';
+                            const domainHost = localHost; // TODO: switch to domain
+                            return isDev ? localHost : domainHost;
+                        }
+                    },
+                ]
+            }),
             new StyleLintPlugin({
                 configFile: '.stylelintrc.json',
                 failOnError: true
