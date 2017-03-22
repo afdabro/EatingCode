@@ -18,13 +18,15 @@ export class AppComponent extends React.Component<{}, {}> {
     return (
       <main role="main">
         <Helmet
-            title="Home"
-            titleTemplate={appTitleTemplate}
-            defaultTitle={appTitle}
+          title="Home"
+          titleTemplate={appTitleTemplate}
+          defaultTitle={appTitle}
+          meta={[{ "name": "author", "content": "Andrew Dabrowski" }]}
         />
         <ResponsiveContainer dateModified={new Date()} isDesktop={false} saveResponsive={() => {
-        // tslint:disable-next-line:no-console
-          console.log("Hello HAL"); }} />
+          // tslint:disable-next-line:no-console
+          console.log("Hello HAL");
+        }} />
         <header>
           <h1 className="app-font-headline">Eating Code For Breakfast</h1>
           <NavContainer dateModified={new Date()} isDesktop={false} />
