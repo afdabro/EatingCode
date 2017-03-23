@@ -28,3 +28,12 @@ $font-size-xl: 2.5em;
     @include app-font-lg;
     font-size: $font-size-xl;
 }
+
+p.app-paragraph {
+    @include app-font-md;
+    text-indent: 1em;
+}
+
+.app-title {
+    @include app-font-lg;
+}

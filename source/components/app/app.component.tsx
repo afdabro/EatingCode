@@ -27,7 +27,7 @@ export class AppComponent extends React.Component<{}, {}> {
           // tslint:disable-next-line:no-console
           console.log("Hello HAL");
         }} />
-        <header>
+        <header className="app-banner">
           <h1 className="app-font-headline">Eating Code For Breakfast</h1>
           <NavContainer dateModified={new Date()} isDesktop={false} />
         </header>
