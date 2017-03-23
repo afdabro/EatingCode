@@ -31,13 +31,11 @@ export class RadarChartComponent extends React.Component<RadarChartOptions, IRad
         this.setState({ "d3": this.radarChart.draw(data, this.chartSettings) });
     }
 
-    // TODO: work on verbiage
     public render() {
         return (
             <figure>
-                <strong>Career Experience</strong>
+                <figcaption>Fig. 1: <em>Real-world experience.</em></figcaption>
                 <RD3Component data={this.state.d3} />
-                <figcaption>Fig. 1: <em>Self reflection of real-world experience.</em></figcaption>
             </figure>
         );
     }
