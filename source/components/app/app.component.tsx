@@ -35,6 +35,7 @@ export class AppComponent extends React.Component<{}, {}> {
           {this.props.children}
         </article>
         <footer>
+          <small>&copy; 2017 Andrew Dabrowski</small>
         </footer>
       </main>
     );
