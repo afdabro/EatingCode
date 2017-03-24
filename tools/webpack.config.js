@@ -108,7 +108,16 @@ module.exports = (isDev) => {
             ifProd(new WebpackMd5Hash()),
             extractSass,
             ifProd(new webpack.optimize.UglifyJsPlugin({ mangle: true, warnings: false, 'screw_ie8': true, conditionals: true, unused: true, comparisons: true, sourceMap: true, sequences: true, 'dead_code': true, evaluate: true, 'if_return': true, 'join_vars': true, output: { comments: false } })),
-            new HtmlWebpackPlugin({ template: 'index.html', inject: true, minify: { removeComments: !isDev, collapseWhitespace: !isDev, keepClosingSlash: !isDev } }),
+            new HtmlWebpackPlugin({
+                template: 'index.html',
+                favicon: 'assets/favicon.ico',
+                inject: true,
+                minify: {
+                    removeComments: !isDev,
+                    collapseWhitespace: !isDev,
+                    keepClosingSlash: !isDev
+                }
+            }),
             new HtmlStringReplace({
                 enable: true,
                 patterns: [
@@ -166,8 +175,8 @@ module.exports = (isDev) => {
                     loader: 'url-loader?limit=4096&mimetype=application/font-woff'
                 },
                 {
-                    test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                    loader: 'file-loader'
+                    test: /\.(jpe?g|png|gif|ico)$/i,
+                    loader: 'file-loader?name=[name].[ext]'
                 },
                 ifDev({
                     enforce: 'pre',
