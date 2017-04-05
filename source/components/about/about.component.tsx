@@ -19,7 +19,7 @@ export class AboutComponent extends React.Component<{}, {}> {
                 <section>
                     <article>
                         <header>
-                            <h1 className="app-title">Greetings</h1>
+                            <h1 className="app-title">Intro</h1>
                         </header>
                         <p className="app-paragraph">
                             I’m glad you’ve made it over to my about page. My name is Andrew Dabrowski. I’m a full stack software engineer. Lately, I’ve been focusing on UX/UI design and data science while applying my knowledge of evolutionary architectures.

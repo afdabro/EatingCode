@@ -1,0 +1,19 @@
+    .skip {
+        position: absolute;
+        top: -63em;
+        left: -63em;
+        height: 0.063em;
+        width: 0.063em;
+        text-align: left;
+        overflow: hidden;
+    }
+    
+    a.skip:active, 
+    a.skip:focus, 
+    a.skip:hover {
+        left: 0; 
+        top: 0;
+        width: auto; 
+        height: auto; 
+        overflow: visible; 
+    }
