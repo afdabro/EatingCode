@@ -29,3 +29,18 @@ article {
 .display-none {
     display: none;
 }
+
+.app-footer {
+    display: flex;
+    height: 5em;
+    ul {
+        width: 20em;
+        height: 5em;
+        margin: auto;
+    }
+    small {
+        width: 12em;
+        height: 1em;
+        margin: auto;
+    }
+}
