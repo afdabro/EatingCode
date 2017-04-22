@@ -8,7 +8,6 @@ import { configureStore } from "./store/configureStore";
 import { syncImmutableHistoryWithStore } from "./store/immutablerouter.store";
 
 import "normalize.css";
-import "./assets/favicon.ico";
 
 // currently not setting initial state
 const store = configureStore(undefined);
