@@ -4,6 +4,7 @@ import * as Helmet from "react-helmet";
 interface IOpenGraphProps {
     title: string;
     description: string;
+    // image 1200px width by 1200px height
     imageUrl: string;
 }
 

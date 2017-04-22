@@ -5,6 +5,7 @@ interface ITwitterCardProps {
     twitterHandle: string;
     title: string;
     description: string;
+    // image must be 280px width by 150px height
     imageUrl: string;
 }
 

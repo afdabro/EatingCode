@@ -29,3 +29,28 @@ article {
 .display-none {
     display: none;
 }
+
+.app-footer {
+    border-top: 0.2em solid $primary-color;
+    display: flex;
+    height: 10em;
+    justify-content: center;
+    flex-direction: column;
+    
+    
+    ul {
+        width: 20em;
+        height: 5em;
+        margin: auto;
+        list-style-type: none;
+    }
+
+    div {
+        display: flex;
+        small {
+            width: 20em;
+            height: 1em;
+            margin-left: auto;
+        }
+    }
+}
