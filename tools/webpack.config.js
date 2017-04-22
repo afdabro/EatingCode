@@ -80,7 +80,7 @@ module.exports = (isDev) => {
         output: {
             path: buildPath,
             publicPath: '/',
-            filename: isDev ? '[name].js' : '[name].[chunkhash].js'
+            filename: '[name].[chunkhash].js'
         },
         performance: {
             hints: false
@@ -175,8 +175,8 @@ module.exports = (isDev) => {
                     loader: 'url-loader?limit=4096&mimetype=application/font-woff'
                 },
                 {
-                    test: /\.(jpe?g|png|gif|ico)$/i,
-                    loader: 'file-loader?name=[name].[ext]'
+                    test: /\.(jpe?g|png|gif)$/i,
+                    loader: 'file-loader?name=images/[name].[ext]'
                 },
                 ifDev({
                     enforce: 'pre',
