@@ -43,21 +43,25 @@ export class AppComponent extends React.Component<{}, {}> {
         <footer className="app-footer">
           <div id="BottomLink"/>
           <SkipToLink LinkId="TopLink" LinkDescription="Skip to Top"/>
-          <ul>
-            <li>
-              <a href="https://github.com/afdabro/EatingCode/tree/development">
-                <img src="./GitHub-Mark-32px.png" alt="GitHub repository for Eating Code" height="32" width="32"/>
-                View EatingCode GitHub Repository
-              </a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/andrew-dabrowski-43023114/">
-                <img src="./In-2C-28px-R.png" alt="View my LinkedIn Profile"/>
-                View my LinkedIn<sup>&reg;</sup> Profile
-              </a>
-            </li>
-          </ul>
-          <small>&copy; 2017 Andrew Dabrowski</small>
+          <div>
+            <ul>
+              <li>
+                <a href="https://github.com/afdabro/EatingCode/tree/development">
+                  <img src="./GitHub-Mark-32px.png" alt="GitHub repository for Eating Code" height="32" width="32"/>
+                  View EatingCode GitHub Repository
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/andrew-dabrowski-43023114/">
+                  <img src="./In-2C-28px-R.png" alt="View my LinkedIn Profile"/>
+                  View my LinkedIn<sup>&reg;</sup> Profile
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <small>&copy; 2017, Andrew Dabrowski. All rights reserved.</small>
+          </div>
         </footer>
       </main>
     );
