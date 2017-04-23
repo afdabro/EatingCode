@@ -51,6 +51,21 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 /*
+    Generates a sitemap
+    Reference:
+    https://github.com/schneidmaster/sitemap-webpack-plugin
+    TODO: Replace with dynamic React Router based sitemap generation
+*/
+const SitemapPlugin = require('sitemap-webpack-plugin');
+const sitePaths = [
+    '/',
+    '/about/'
+];
+
+const localHost = 'https://localhost:3000';
+const domainHost = localHost; // TODO: switch to domain
+
+/*
     Paths
 */
 const buildPath = path.join(__dirname, '../build');
@@ -124,8 +139,6 @@ module.exports = (isDev) => {
                     {
                         match: /<!-- @host -->/ig,
                         replacement: function (match) {
-                            const localHost = 'https://localhost:3000';
-                            const domainHost = localHost; // TODO: switch to domain
                             return isDev ? localHost : domainHost;
                         }
                     },
@@ -136,7 +149,8 @@ module.exports = (isDev) => {
                 failOnError: true,
                 syntax: 'scss',
                 quiet: false
-            })
+            }),
+            new SitemapPlugin(domainHost, sitePaths)
         ].filter(nullsOut),
         module: {
             rules: [
