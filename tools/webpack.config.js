@@ -66,6 +66,13 @@ const localHost = 'https://localhost:3000';
 const domainHost = localHost; // TODO: switch to domain
 
 /*
+    GZip Compression
+    Reference:
+    https://github.com/webpack-contrib/compression-webpack-plugin
+*/
+const CompressionPlugin = require("compression-webpack-plugin");
+
+/*
     Paths
 */
 const buildPath = path.join(__dirname, '../build');
@@ -150,7 +157,14 @@ module.exports = (isDev) => {
                 syntax: 'scss',
                 quiet: false
             }),
-            new SitemapPlugin(domainHost, sitePaths)
+            new SitemapPlugin(domainHost, sitePaths),
+            new CompressionPlugin({
+                asset: "[path].gz[query]",
+                algorithm: "gzip",
+                test: /\.(js|html|css)$/,
+                threshold: 10240,
+                minRatio: 0.8
+            })
         ].filter(nullsOut),
         module: {
             rules: [
