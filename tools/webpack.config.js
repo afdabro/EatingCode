@@ -133,7 +133,9 @@ module.exports = (isDev) => {
             }),
             new StyleLintPlugin({
                 configFile: '.stylelintrc.json',
-                failOnError: true
+                failOnError: true,
+                syntax: 'scss',
+                quiet: false
             })
         ].filter(nullsOut),
         module: {
