@@ -72,6 +72,25 @@ const domainHost = localHost; // TODO: switch to domain
 */
 const CompressionPlugin = require("compression-webpack-plugin");
 
+const devEntry = [
+    'react-hot-loader/patch',
+    // activate HMR for React
+
+    'webpack-dev-server/client?https://localhost:3000',
+    // bundle the client for webpack-dev-server
+    // and connect to the provided endpoint
+
+    'webpack/hot/only-dev-server',
+    // bundle the client for hot reloading
+    // only- means to only hot reload for successful updates
+
+    './appLoader'
+];
+
+const prodEntry = [
+    './appLoader'
+];
+
 /*
     Paths
 */
@@ -96,13 +115,11 @@ module.exports = (isDev) => {
         devtool: isDev ? 'inline-source-map' : 'source-map',
         target: 'web',
         context: sourcePath,
-        entry: {
-            main: './appLoader'
-        },
+        entry: isDev ? devEntry : prodEntry,
         output: {
             path: buildPath,
             publicPath: '/',
-            filename: '[name].[chunkhash].js'
+            filename: '[name].[hash].js'
         },
         performance: {
             hints: false
@@ -125,7 +142,7 @@ module.exports = (isDev) => {
                     }
                 }
             }),
-            // ifDev(new webpack.HotModuleReplacementPlugin()),
+            ifDev(new webpack.HotModuleReplacementPlugin()),
             ifDev(new webpack.NamedModulesPlugin()),
             ifProd(new WebpackMd5Hash()),
             extractSass,
@@ -151,6 +168,17 @@ module.exports = (isDev) => {
                     },
                 ]
             }),
+            new HtmlStringReplace({
+                enable: true,
+                patterns: [
+                    {
+                        match: /<!-- @wss -->/ig,
+                        replacement: function (match) {
+                            return isDev ? 'wss://localhost:3000' : '';
+                        }
+                    },
+                ]
+            }),
             new StyleLintPlugin({
                 configFile: '.stylelintrc.json',
                 failOnError: true,
@@ -164,7 +192,8 @@ module.exports = (isDev) => {
                 test: /\.(js|html|css)$/,
                 threshold: 10240,
                 minRatio: 0.8
-            })
+            }),
+            new webpack.NoEmitOnErrorsPlugin(),// do not emit compiled assets that include errors  
         ].filter(nullsOut),
         module: {
             rules: [

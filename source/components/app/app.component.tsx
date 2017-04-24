@@ -47,13 +47,13 @@ export class AppComponent extends React.Component<{}, {}> {
             <ul>
               <li>
                 <a href="https://github.com/afdabro/EatingCode/tree/development">
-                  <img src="./GitHub-Mark-32px.png" alt="GitHub repository for Eating Code" height="32" width="32"/>
+                  <img src="./images/GitHub-Mark-32px.png" alt="GitHub repository for Eating Code" height="32" width="32"/>
                   View EatingCode GitHub Repository
                 </a>
               </li>
               <li>
                 <a href="https://www.linkedin.com/in/andrew-dabrowski-43023114/">
-                  <img src="./In-2C-28px-R.png" alt="View my LinkedIn Profile"/>
+                  <img src="./images/In-2C-28px-R.png" alt="View my LinkedIn Profile"/>
                   View my LinkedIn<sup>&reg;</sup> Profile
                 </a>
               </li>
