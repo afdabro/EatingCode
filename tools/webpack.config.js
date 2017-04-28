@@ -73,9 +73,12 @@ const domainHost = localHost; // TODO: switch to domain
 const CompressionPlugin = require("compression-webpack-plugin");
 
 const devEntry = [
+    // must be first entry to properly set public path
+    '../source/webpack-public-path',
+
     'react-hot-loader/patch',
     // activate HMR for React
-
+    
     'webpack-dev-server/client?https://localhost:3000',
     // bundle the client for webpack-dev-server
     // and connect to the provided endpoint
