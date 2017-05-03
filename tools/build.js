@@ -11,7 +11,7 @@ console.log(chalk.blue('Generating minified bundle for production. This will tak
 let compiler = null;
 
 try {
-  compiler = webpack(webpackConfig({isDev: false}));
+  compiler = webpack(webpackConfig(false));
 } catch(err) {
   console.log(err);
   throw err;

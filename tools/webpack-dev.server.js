@@ -1,3 +1,4 @@
+"use strict";
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.config');
@@ -10,7 +11,7 @@ console.log(chalk.blue('Starting WebpackDevServer debug'));
 
 try {
 
-    const compiler = webpack(config({ isDev: true }));
+    const compiler = webpack(config(true));
 
     const server = new WebpackDevServer(compiler, {
         contentBase: './build',

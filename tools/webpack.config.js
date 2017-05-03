@@ -1,3 +1,4 @@
+"use strict";
 /*
     Webpack 2
     Reference:
@@ -63,7 +64,7 @@ const sitePaths = [
 ];
 
 const localHost = 'https://localhost:3000';
-const domainHost = localHost; // TODO: switch to domain
+const domainHost = 'https://www.eatingcode.net';
 
 /*
     GZip Compression
@@ -105,6 +106,7 @@ module.exports = (isDev) => {
     /*
         Helper methods from React Starter
     */
+    console.log(`isDev: ${isDev}`);
     const ifDev = then => (isDev ? then : null);
     const ifProd = then => (!isDev ? then : null);
     const nullsOut = i => i;

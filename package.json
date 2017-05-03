@@ -51,6 +51,7 @@
     "tslint": "^4.3.1",
     "tslint-loader": "^3.4.2",
     "typescript": "^2.2.0",
+    "uglify-js": "github:mishoo/UglifyJS2#harmony",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.5",
