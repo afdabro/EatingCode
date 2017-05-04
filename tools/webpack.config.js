@@ -1,3 +1,4 @@
+"use strict";
 /*
     Webpack 2
     Reference:
@@ -51,6 +52,50 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 /*
+    Generates a sitemap
+    Reference:
+    https://github.com/schneidmaster/sitemap-webpack-plugin
+    TODO: Replace with dynamic React Router based sitemap generation
+*/
+const SitemapPlugin = require('sitemap-webpack-plugin');
+const sitePaths = [
+    '/',
+    '/about/'
+];
+
+const localHost = 'https://localhost:3000';
+const domainHost = 'https://www.eatingcode.net';
+
+/*
+    GZip Compression
+    Reference:
+    https://github.com/webpack-contrib/compression-webpack-plugin
+*/
+const CompressionPlugin = require("compression-webpack-plugin");
+
+const devEntry = [
+    // must be first entry to properly set public path
+    '../source/webpack-public-path',
+
+    'react-hot-loader/patch',
+    // activate HMR for React
+    
+    'webpack-dev-server/client?https://localhost:3000',
+    // bundle the client for webpack-dev-server
+    // and connect to the provided endpoint
+
+    'webpack/hot/only-dev-server',
+    // bundle the client for hot reloading
+    // only- means to only hot reload for successful updates
+
+    './appLoader'
+];
+
+const prodEntry = [
+    './appLoader'
+];
+
+/*
     Paths
 */
 const buildPath = path.join(__dirname, '../build');
@@ -61,6 +106,7 @@ module.exports = (isDev) => {
     /*
         Helper methods from React Starter
     */
+    console.log(`isDev: ${isDev}`);
     const ifDev = then => (isDev ? then : null);
     const ifProd = then => (!isDev ? then : null);
     const nullsOut = i => i;
@@ -74,13 +120,11 @@ module.exports = (isDev) => {
         devtool: isDev ? 'inline-source-map' : 'source-map',
         target: 'web',
         context: sourcePath,
-        entry: {
-            main: './appLoader'
-        },
+        entry: isDev ? devEntry : prodEntry,
         output: {
             path: buildPath,
             publicPath: '/',
-            filename: '[name].[chunkhash].js'
+            filename: '[name].[hash].js'
         },
         performance: {
             hints: false
@@ -103,7 +147,7 @@ module.exports = (isDev) => {
                     }
                 }
             }),
-            // ifDev(new webpack.HotModuleReplacementPlugin()),
+            ifDev(new webpack.HotModuleReplacementPlugin()),
             ifDev(new webpack.NamedModulesPlugin()),
             ifProd(new WebpackMd5Hash()),
             extractSass,
@@ -124,17 +168,37 @@ module.exports = (isDev) => {
                     {
                         match: /<!-- @host -->/ig,
                         replacement: function (match) {
-                            const localHost = 'https://localhost:3000';
-                            const domainHost = localHost; // TODO: switch to domain
                             return isDev ? localHost : domainHost;
+                        }
+                    },
+                ]
+            }),
+            new HtmlStringReplace({
+                enable: true,
+                patterns: [
+                    {
+                        match: /<!-- @wss -->/ig,
+                        replacement: function (match) {
+                            return isDev ? 'wss://localhost:3000' : '';
                         }
                     },
                 ]
             }),
             new StyleLintPlugin({
                 configFile: '.stylelintrc.json',
-                failOnError: true
-            })
+                failOnError: true,
+                syntax: 'scss',
+                quiet: false
+            }),
+            new SitemapPlugin(domainHost, sitePaths),
+            new CompressionPlugin({
+                asset: "[path].gz[query]",
+                algorithm: "gzip",
+                test: /\.(js|html|css)$/,
+                threshold: 10240,
+                minRatio: 0.8
+            }),
+            new webpack.NoEmitOnErrorsPlugin(),// do not emit compiled assets that include errors  
         ].filter(nullsOut),
         module: {
             rules: [
