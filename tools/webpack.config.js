@@ -1,3 +1,4 @@
+"use strict";
 /*
     Webpack 2
     Reference:
@@ -19,6 +20,13 @@ const WebpackMd5Hash = require('webpack-md5-hash');
     https://github.com/jantimon/html-webpack-plugin
 */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+/*
+    Replaces strings with variables within html
+    Reference:
+    https://github.com/erraX/html-string-replace-webpack-plugin
+*/
+const HtmlStringReplace = require('html-string-replace-webpack-plugin');
 
 /*
     Extract text from bundle
@@ -44,6 +52,50 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 /*
+    Generates a sitemap
+    Reference:
+    https://github.com/schneidmaster/sitemap-webpack-plugin
+    TODO: Replace with dynamic React Router based sitemap generation
+*/
+const SitemapPlugin = require('sitemap-webpack-plugin');
+const sitePaths = [
+    '/',
+    '/about/'
+];
+
+const localHost = 'https://localhost:3000';
+const domainHost = 'https://www.eatingcode.net';
+
+/*
+    GZip Compression
+    Reference:
+    https://github.com/webpack-contrib/compression-webpack-plugin
+*/
+const CompressionPlugin = require("compression-webpack-plugin");
+
+const devEntry = [
+    // must be first entry to properly set public path
+    '../source/webpack-public-path',
+
+    'react-hot-loader/patch',
+    // activate HMR for React
+    
+    'webpack-dev-server/client?https://localhost:3000',
+    // bundle the client for webpack-dev-server
+    // and connect to the provided endpoint
+
+    'webpack/hot/only-dev-server',
+    // bundle the client for hot reloading
+    // only- means to only hot reload for successful updates
+
+    './appLoader'
+];
+
+const prodEntry = [
+    './appLoader'
+];
+
+/*
     Paths
 */
 const buildPath = path.join(__dirname, '../build');
@@ -54,21 +106,25 @@ module.exports = (isDev) => {
     /*
         Helper methods from React Starter
     */
+    console.log(`isDev: ${isDev}`);
     const ifDev = then => (isDev ? then : null);
     const ifProd = then => (!isDev ? then : null);
     const nullsOut = i => i;
+
+    const extractSass = new ExtractTextPlugin({
+        filename: "[name].[contenthash].css",
+        disable: false
+    });
 
     return {
         devtool: isDev ? 'inline-source-map' : 'source-map',
         target: 'web',
         context: sourcePath,
-        entry: {
-            main: './appLoader'
-        },
+        entry: isDev ? devEntry : prodEntry,
         output: {
             path: buildPath,
             publicPath: '/',
-            filename: isDev ? '[name].js' : '[name].[chunkhash].js'
+            filename: '[name].[hash].js'
         },
         performance: {
             hints: false
@@ -91,16 +147,58 @@ module.exports = (isDev) => {
                     }
                 }
             }),
-            // ifDev(new webpack.HotModuleReplacementPlugin()),
+            ifDev(new webpack.HotModuleReplacementPlugin()),
             ifDev(new webpack.NamedModulesPlugin()),
             ifProd(new WebpackMd5Hash()),
-            ifProd(new ExtractTextPlugin({ filename: '[name].[contenthash].css' })),
+            extractSass,
             ifProd(new webpack.optimize.UglifyJsPlugin({ mangle: true, warnings: false, 'screw_ie8': true, conditionals: true, unused: true, comparisons: true, sourceMap: true, sequences: true, 'dead_code': true, evaluate: true, 'if_return': true, 'join_vars': true, output: { comments: false } })),
-            new HtmlWebpackPlugin({ template: 'index.html', inject: true, minify: { removeComments: !isDev, collapseWhitespace: !isDev, keepClosingSlash: !isDev } }),
+            new HtmlWebpackPlugin({
+                template: 'index.html',
+                favicon: 'assets/favicon.ico',
+                inject: true,
+                minify: {
+                    removeComments: !isDev,
+                    collapseWhitespace: !isDev,
+                    keepClosingSlash: !isDev
+                }
+            }),
+            new HtmlStringReplace({
+                enable: true,
+                patterns: [
+                    {
+                        match: /<!-- @host -->/ig,
+                        replacement: function (match) {
+                            return isDev ? localHost : domainHost;
+                        }
+                    },
+                ]
+            }),
+            new HtmlStringReplace({
+                enable: true,
+                patterns: [
+                    {
+                        match: /<!-- @wss -->/ig,
+                        replacement: function (match) {
+                            return isDev ? 'wss://localhost:3000' : '';
+                        }
+                    },
+                ]
+            }),
             new StyleLintPlugin({
                 configFile: '.stylelintrc.json',
-                failOnError: true
-            })
+                failOnError: true,
+                syntax: 'scss',
+                quiet: false
+            }),
+            new SitemapPlugin(domainHost, sitePaths),
+            new CompressionPlugin({
+                asset: "[path].gz[query]",
+                algorithm: "gzip",
+                test: /\.(js|html|css)$/,
+                threshold: 10240,
+                minRatio: 0.8
+            }),
+            new webpack.NoEmitOnErrorsPlugin(),// do not emit compiled assets that include errors  
         ].filter(nullsOut),
         module: {
             rules: [
@@ -116,14 +214,20 @@ module.exports = (isDev) => {
                     exclude: /node_modules/
                 },
                 {
-                    test: /\.(css|scss)$/,
-                    include: [sourcePath],
-                    loader: isDev ? 'style-loader!css-loader?sourceMap!sass-loader?sourceMap' : ExtractTextPlugin.extract({ loader: 'css-loader?sourceMap!sass-loader?sourceMap' })
+                    test: /\.scss$/,
+                    loader: extractSass.extract({
+                        use: [{
+                            loader: "css-loader"
+                        }, {
+                            loader: "sass-loader"
+                        }
+                        ],
+                        fallback: "style-loader"
+                    })
                 },
                 {
                     test: /\.css$/,
-                    include: [path.resolve(__dirname, '../node_modules/normalize.css')],
-                    loader: isDev ? 'style-loader!css-loader' : ExtractTextPlugin.extract({ loader: 'css-loader' })
+                    loader: "css-loader"
                 },
                 {
                     test: /\.(png|jpg|wav|mp3)$/,
@@ -135,8 +239,8 @@ module.exports = (isDev) => {
                     loader: 'url-loader?limit=4096&mimetype=application/font-woff'
                 },
                 {
-                    test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                    loader: 'file-loader'
+                    test: /\.(jpe?g|png|gif)$/i,
+                    loader: 'file-loader?name=images/[name].[ext]'
                 },
                 ifDev({
                     enforce: 'pre',
@@ -146,7 +250,7 @@ module.exports = (isDev) => {
             ].filter(nullsOut)
         },
         resolve: {
-            extensions: ['.tsx', '.ts', '.js']
+            extensions: ['.tsx', '.ts', '.js', '.scss', 'css']
         }
     };
 };

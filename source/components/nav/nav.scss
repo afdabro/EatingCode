@@ -1,0 +1,45 @@
+@import "../styles/color.palette";
+@import "../styles/typography";
+@import "../styles/responsive";
+
+nav.navContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+ul.navList {
+    display: flex;
+    li {
+        display: flex;
+    }
+}
+
+.navLink a:hover { 
+    background-color: darkorange;
+    border: 0.1em groove $accent-color-lt;
+}
+
+.navLink a {
+    background: $accent-color-lt;
+    border-radius: 0.25em;
+    width: 2em;
+    height: 2em;
+    margin: auto;
+    margin-right: 0.5em;
+    color: $accent-color-drk;
+    @include tabletOrDesktop {
+        width: 4em;
+        text-align: center;
+        @include app-font-sm;
+    }
+
+    i {
+        margin: 0.2em;
+    }
+}
+
+a.navLinkActive {
+    background-color: darkorange;
+    border: 0.1025em inset yellow;
+}
