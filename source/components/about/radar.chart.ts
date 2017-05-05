@@ -15,11 +15,12 @@ export class RadarChart {
         const radius = options.factor * Math.min(options.w / magic2, options.h / magic2);
 
         const node = document.createElement("div");
+        node.setAttribute("class", "svg-container");
 
         const g = select(node)
             .append("svg")
-            .attr("width", options.w + options.extraWidthX)
-            .attr("height", options.h + options.extraWidthY)
+            .attr("viewBox", `0 0 ${options.w} ${options.h}`)
+            .attr("class", "svg-content")
             .append("g")
             .attr("transform", "translate(" + options.translateX + "," + options.translateY + ")");
 

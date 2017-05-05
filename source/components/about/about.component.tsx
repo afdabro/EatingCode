@@ -2,7 +2,8 @@ import * as React from "react";
 import { SocialMeta } from "../seo/social.meta.component";
 import { RadarChartComponent } from "./radar.chart.component";
 require("./about.scss");
-const dimension = 600;
+const chartWidth = 1500;
+const chartHeight = 1500;
 
 export class AboutComponent extends React.Component<{}, {}> {
     constructor(props) {
@@ -30,7 +31,7 @@ export class AboutComponent extends React.Component<{}, {}> {
                 <section>
                     <article>
                         <header>
-                            <h1 className="app-title">Career Path – The Long Road</h1>
+                            <h1 className="app-title">Career Path</h1>
                         </header>
                         <p className="app-paragraph">
                             I started “Eating code for Breakfast” back in ’98 as an experiment. I woke up every morning and spent a few hours learning how video games were made.
@@ -43,7 +44,7 @@ export class AboutComponent extends React.Component<{}, {}> {
                             The team taught me about the QA part of being a software engineer. In time, I grew into a full stack software engineer with a minor in data science.
                         </p>
                         <aside>
-                            <RadarChartComponent w={dimension} h={dimension} />
+                            <RadarChartComponent w={chartWidth} h={chartHeight} />
                         </aside>
                     </article>
                 </section>

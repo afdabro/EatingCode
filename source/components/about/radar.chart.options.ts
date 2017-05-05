@@ -2,8 +2,6 @@ import { ScaleOrdinal, scaleOrdinal } from "d3-scale";
 
 export class RadarChartOptions {
     public color?: ScaleOrdinal<string, {}> = scaleOrdinal().range(["#6F257F", "#CA0D59"]);
-    public extraWidthX?: number = 200;
-    public extraWidthY?: number = 100;
     public factor?: number = 1;
     public factorLegend?: number = .85;
     public h?: number = 600;
