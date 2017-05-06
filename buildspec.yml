@@ -8,5 +8,5 @@ phases:
       - npm run build
   post_build:
     commands:
-      - aws s3 sync . "s3://${BUCKET_NAME}" --delete --exclude images/*
-      - aws s3 sync ./images "s3://${BUCKET_NAME}/images" --delete --cache-control "max-age=31536000"
+      - aws s3 sync ./build "s3://${BUCKET_NAME}" --delete --exclude ./build/images/*
+      - aws s3 sync ./build/images "s3://${BUCKET_NAME}/images" --delete --cache-control "max-age=31536000"
