@@ -11,6 +11,27 @@ article {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    width: 100%;
+}
+
+aside {
+    width: 100%;
+}
+
+section {
+    width: 100%;
+}
+
+.svg-container {
+    height: 40em;
+    width: 40em;
+	vertical-align: middle; 
+	overflow: hidden; 
+}
+
+.svg-content {
+    height: 30em;
+    width: 40em;
 }
 
 .app-font-headline {

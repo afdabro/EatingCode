@@ -3,6 +3,7 @@
   "scripts": {
     "clean": "rimraf build",
     "build": "npm run clean && node tools/build.js",
+    "debug": "node --nolazy --debug-brk=5858 tools/build.js",
     "dev-start": "node tools/webpack-dev.server.js"
   },
   "devDependencies": {

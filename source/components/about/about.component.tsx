@@ -2,7 +2,8 @@ import * as React from "react";
 import { SocialMeta } from "../seo/social.meta.component";
 import { RadarChartComponent } from "./radar.chart.component";
 require("./about.scss");
-const dimension = 600;
+const chartWidth = 2000;
+const chartHeight = 2000;
 
 export class AboutComponent extends React.Component<{}, {}> {
     constructor(props) {
@@ -14,9 +15,15 @@ export class AboutComponent extends React.Component<{}, {}> {
             <article>
                 <header>
                     <h1 className="app-title">About</h1>
-                    <SocialMeta title="About Eating Code" description="The origins of Eating Code for Breakfast" imageUrl="" twitterHandle=""/>
+                    <SocialMeta title="About Eating Code" description="The origins of Eating Code for Breakfast" imageUrl="" twitterHandle="" />
+                    <nav>
+                        <ul>
+                            <li><a href="#about-intro">Intro</a></li>
+                            <li><a href="#about-career">Career Path</a></li>
+                        </ul>
+                    </nav>
                 </header>
-                <section>
+                <section id="about-intro">
                     <article>
                         <header>
                             <h1 className="app-title">Intro</h1>
@@ -27,10 +34,10 @@ export class AboutComponent extends React.Component<{}, {}> {
                         </p>
                     </article>
                 </section>
-                <section>
+                <section id="about-career">
                     <article>
                         <header>
-                            <h1 className="app-title">Career Path – The Long Road</h1>
+                            <h1 className="app-title">Career Path</h1>
                         </header>
                         <p className="app-paragraph">
                             I started “Eating code for Breakfast” back in ’98 as an experiment. I woke up every morning and spent a few hours learning how video games were made.
@@ -43,7 +50,7 @@ export class AboutComponent extends React.Component<{}, {}> {
                             The team taught me about the QA part of being a software engineer. In time, I grew into a full stack software engineer with a minor in data science.
                         </p>
                         <aside>
-                            <RadarChartComponent w={dimension} h={dimension} />
+                            <RadarChartComponent w={chartWidth} h={chartHeight} />
                         </aside>
                     </article>
                 </section>

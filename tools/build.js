@@ -25,10 +25,10 @@ compiler.run((err,stats) => {
 
   const jsonStats = stats.toJson();
 
-  if (jsonStats.hasErrors)
+  if (jsonStats.errors.length !== 0)
     return jsonStats.errors.map(err => console.log(chalk.red(err)));
 
-  if (jsonStats.hasWarning)
+  if (jsonStats.warnings !== 0)
     jsonStats.warnings.map(warn => console.log(chalk.yellow(warn)));
 
   console.log(chalk.bold(`Webpack stats: ${stats}`));
