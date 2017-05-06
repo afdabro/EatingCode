@@ -93,7 +93,6 @@
 
         "cyclomatic-complexity": true,
         "eofline": true,
-        "linebreak-style": [true, "CRLF"],
         "max-classes-per-file": [true, 1],
         "no-default-export": true,
         "no-mergeable-namespace": true,
