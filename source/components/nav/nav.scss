@@ -16,7 +16,7 @@ ul.navList {
 }
 
 .navLink a:hover { 
-    background-color: darkorange;
+    background-color: #ff8d03;
     border: 0.1em groove $accent-color-lt;
 }
 
@@ -41,5 +41,5 @@ ul.navList {
 
 a.navLinkActive {
     background-color: darkorange;
-    border: 0.1025em inset yellow;
+    border: 0.1025em inset $accent-color-lt;
 }

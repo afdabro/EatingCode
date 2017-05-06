@@ -2,8 +2,8 @@ import * as React from "react";
 import { SocialMeta } from "../seo/social.meta.component";
 import { RadarChartComponent } from "./radar.chart.component";
 require("./about.scss");
-const chartWidth = 1500;
-const chartHeight = 1500;
+const chartWidth = 2000;
+const chartHeight = 2000;
 
 export class AboutComponent extends React.Component<{}, {}> {
     constructor(props) {
@@ -15,9 +15,15 @@ export class AboutComponent extends React.Component<{}, {}> {
             <article>
                 <header>
                     <h1 className="app-title">About</h1>
-                    <SocialMeta title="About Eating Code" description="The origins of Eating Code for Breakfast" imageUrl="" twitterHandle=""/>
+                    <SocialMeta title="About Eating Code" description="The origins of Eating Code for Breakfast" imageUrl="" twitterHandle="" />
+                    <nav>
+                        <ul>
+                            <li><a href="#about-intro">Intro</a></li>
+                            <li><a href="#about-career">Career Path</a></li>
+                        </ul>
+                    </nav>
                 </header>
-                <section>
+                <section id="about-intro">
                     <article>
                         <header>
                             <h1 className="app-title">Intro</h1>
@@ -28,7 +34,7 @@ export class AboutComponent extends React.Component<{}, {}> {
                         </p>
                     </article>
                 </section>
-                <section>
+                <section id="about-career">
                     <article>
                         <header>
                             <h1 className="app-title">Career Path</h1>

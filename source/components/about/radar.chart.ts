@@ -57,7 +57,7 @@ export class RadarChart {
                 .attr("y", () => { return levelFactor * (1 - options.factor * Math.cos(0)); })
                 .attr("class", "legend")
                 .style("font-family", "sans-serif")
-                .style("font-size", "10px")
+                .style("font-size", "1.5em")
                 .attr("transform", "translate(" + (options.w / magic2 - levelFactor + options.toRight) + ", " + (options.h / magic2 - levelFactor) + ")")
                 .attr("fill", "#737373")
                 // tslint:disable-next-line:no-magic-numbers
@@ -88,7 +88,7 @@ export class RadarChart {
             // tslint:disable-next-line:no-shadowed-variable
             .text((d: string) => { return d; })
             .style("font-family", "sans-serif")
-            .style("font-size", "11px")
+            .style("font-size", "2em")
             .attr("text-anchor", "middle")
             .attr("dy", "1.5em")
             .attr("transform", () => { return "translate(0, -10)"; })
