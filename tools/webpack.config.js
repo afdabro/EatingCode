@@ -79,7 +79,7 @@ const devEntry = [
 
     'react-hot-loader/patch',
     // activate HMR for React
-    
+
     'webpack-dev-server/client?https://localhost:3000',
     // bundle the client for webpack-dev-server
     // and connect to the provided endpoint
@@ -242,6 +242,11 @@ module.exports = (isDev) => {
                     test: /\.(jpe?g|png|gif)$/i,
                     loader: 'file-loader?name=images/[name].[ext]'
                 },
+                // https://github.com/webpack-contrib/raw-loader
+                {
+                    test: /\.md$/,
+                    use: 'raw-loader'
+                },
                 ifDev({
                     enforce: 'pre',
                     test: /\.(tsx|ts|js)$/,
@@ -250,7 +255,7 @@ module.exports = (isDev) => {
             ].filter(nullsOut)
         },
         resolve: {
-            extensions: ['.tsx', '.ts', '.js', '.scss', 'css']
+            extensions: ['.tsx', '.ts', '.js', '.scss', 'css', '.md']
         }
     };
 };
