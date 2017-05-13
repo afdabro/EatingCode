@@ -10,5 +10,5 @@ export const appRoutes = (
                 <IndexRoute component={homeComponent} />
                 <Route path="/home" component={homeComponent} />
                 <Route path="/about" component={AboutComponent} />
-                <Route path="/blog" component={BlogComponent} />
+                <Route path="/blogs/:id" component={BlogComponent} />
             </Route>);
