@@ -28,6 +28,7 @@ ul.navList {
     margin: auto;
     margin-right: 0.5em;
     color: $accent-color-drk;
+    text-decoration: none;
     @include tabletOrDesktop {
         width: 4em;
         text-align: center;
