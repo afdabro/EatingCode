@@ -1,14 +1,19 @@
 import * as React from "react";
 import * as Helmet from "react-helmet";
 import { Link } from "react-router";
+import "reflect-metadata";
+import { lazyInject } from "../../inversify.config";
+import { NAV_TYPES } from "./nav.types";
+import { INavTitleProvider } from "./navtitle.provider";
 
 require("./nav.scss");
 import { IResponsiveModel } from "../../models/responsive.model";
 
 export class NavComponent extends React.Component<IResponsiveModel, {}> {
+    @lazyInject(NAV_TYPES.NavTitleProvider) private navTitleProvider: INavTitleProvider;
 
     public render(): JSX.Element {
-        const currentPath = this.getNavTitle();
+        const currentPath = this.navTitleProvider.getNavTitle();
         return (
             <nav className="navContainer">
                 <Helmet title={currentPath} />
@@ -18,14 +23,5 @@ export class NavComponent extends React.Component<IResponsiveModel, {}> {
                 </ul>
             </nav>
         );
-    }
-
-    private getNavTitle() {
-        // Note: This only works for simple one level navigations
-        const currentPath = window.location.pathname.replace("/", "");
-        if (currentPath) {
-            return currentPath[0].toUpperCase() + currentPath.slice(1);
-        }
-        return currentPath;
     }
 }
