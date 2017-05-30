@@ -1,5 +1,8 @@
 import * as React from "react";
-import { BlogProvider } from "./blog.provider";
+import "reflect-metadata";
+import { lazyInject } from "../../inversify.config";
+import { IBlogProvider } from "./blog.provider";
+import { BLOG_TYPES } from "./blog.types";
 import { BlogPost } from "./blogpost";
 
 interface IBlogComponentProps {
@@ -9,11 +12,7 @@ interface IBlogComponentProps {
 }
 
 export class BlogComponent extends React.Component<IBlogComponentProps, {}> {
-    // TODO: Convert to use Redux container
-    private blogProvider = new BlogProvider();
-    constructor(props) {
-        super(props);
-    }
+    @lazyInject(BLOG_TYPES.BlogProvider) private blogProvider: IBlogProvider;
 
     public render() {
         const blogPost = this.blogProvider.getBlogPost(this.props.params.id);

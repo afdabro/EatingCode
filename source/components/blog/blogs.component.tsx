@@ -1,12 +1,11 @@
 import * as React from "react";
-import { BlogProvider } from "./blog.provider";
+import "reflect-metadata";
+import { lazyInject } from "../../inversify.config";
+import { IBlogProvider } from "./blog.provider";
+import { BLOG_TYPES } from "./blog.types";
 
 export class BlogsComponent extends React.Component<{}, {}> {
-    // TODO: Convert to use Redux container
-    private blogProvider = new BlogProvider();
-    constructor(props) {
-        super(props);
-    }
+    @lazyInject(BLOG_TYPES.BlogProvider) private blogProvider: IBlogProvider;
 
     public render() {
         const blogPosts = this.blogProvider.getBlogPosts();

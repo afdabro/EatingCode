@@ -12,9 +12,6 @@ interface IBlogPostProps {
 }
 
 export class BlogPost extends React.Component<IBlogPostProps, {}> {
-    constructor(props) {
-        super(props);
-    }
 
     public render() {
         return (<div id={this.props.id}><Helmet title={this.props.title} /><Markdown markup={this.props.markdown} /></div>);
